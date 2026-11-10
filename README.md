@@ -4,7 +4,6 @@ A customer churn analysis for a telecom company: who leaves, why, and how to spe
 
 **Tools:** Python (pandas, scikit-learn), Matplotlib
 
-**[View the full analysis notebook](telco_churn_retention.ipynb)**
 
 ## Key findings
 
@@ -51,17 +50,3 @@ Based on **7,043 customers**, of whom **1,869 (26.5%) left** in one month.
 - The offer's cost and success rate are assumptions and should be tested with a small trial first.
 - The patterns show correlation, not cause.
 
-## Run it yourself
-
-1. Download `WA_Fn-UseC_-Telco-Customer-Churn.csv` from [Kaggle: Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) and put it in a `data/` folder.
-2. Install the packages:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Open `telco_churn_retention.ipynb` and run all cells. Change `OFFER_COST`, `SUCCESS_RATE` and `MONTHS_KEPT` in section 8 to test other assumptions.
-
-## Author
-
-**Lilit Poghosyan**
