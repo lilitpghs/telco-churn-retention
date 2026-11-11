@@ -1,6 +1,6 @@
-# Which Customers Will Leave, and How Much Can We Save?
+# Which Customers Will Leave and How Much Can We Save?
 
-A customer churn analysis for a telecom company: who leaves, why, and how to spend a retention budget for the biggest return.
+A customer churn analysis for a telecom company: who leaves, why and how to spend a retention budget for the biggest return.
 
 **Tools:** Python (pandas, scikit-learn), Matplotlib
 
