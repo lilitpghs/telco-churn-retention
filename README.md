@@ -138,8 +138,6 @@ Every chart is followed by a short insight in plain words.
 Churn Analysis/
 ├── Telco Customer Churn Analysis.ipynb   # the full analysis
 ├── README.md
-├── data/
-│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 ├── figures/                              # all 14 charts as PNG files
 └── outputs/
     ├── retention_target_list.csv         # ranked customer list for the retention team
