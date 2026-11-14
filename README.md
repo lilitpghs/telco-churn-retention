@@ -6,7 +6,7 @@ An end-to-end data analysis project in Python: data cleaning, exploratory data a
 
 **Tools:** Python, pandas, NumPy, Matplotlib, seaborn, SciPy, scikit-learn, Jupyter Notebook
 
-**[Open the full analysis notebook](Telco%20Customer%20Churn%20Analysis.ipynb)**
+
 
 ---
 
