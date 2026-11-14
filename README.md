@@ -8,7 +8,6 @@ An end-to-end data analysis project in Python: data cleaning, exploratory data a
 
 
 
----
 
 ## The business problem
 
