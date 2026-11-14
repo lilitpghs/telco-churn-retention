@@ -6,7 +6,9 @@ An end-to-end data analysis project in Python: data cleaning, exploratory data a
 
 **Tools:** Python, pandas, NumPy, Matplotlib, seaborn, SciPy, scikit-learn, Jupyter Notebook
 
+**[Open the full analysis notebook](Telco%20Customer%20Churn%20Analysis.ipynb)**
 
+---
 
 ## The business problem
 
@@ -45,12 +47,13 @@ This project answers four questions:
 
 | | Finding |
 |---|---|
-| **Churn is expensive** | 1,869 customers (26.5%) left. They paid 30.5% of monthly revenue, about **$139,000 a month or $1.67 million a year**, because leavers paid more on average ($74 against $61). |
-| **Commitment matters most** | 43% of month-to-month customers left, against 11% on one-year and 3% on two-year contracts. Month-to-month customers are 55% of the base but **89% of all leavers**. |
-| **The first months are critical** | 53% of customers in their first 6 months left, against 10% of those with more than 4 years. |
-| **Other warning signs** | Fiber optic internet (42% churn against 19% for DSL), payment by electronic check (45%) and no tech support or online security (about 42% against 15%). |
+| **Churn is expensive** | 1,869 customers (26.5%) left. They accounted for 30.5% of monthly charges, about **$139,000 a month**, because leavers paid more on average ($74 against $61). Annualised over 12 months that is about **$1.67 million**, an estimate of the revenue associated with churned customers, not a confirmed financial loss. |
+| **Commitment matters most** | 43% of month-to-month customers left, against 11% on one-year and 3% on two-year contracts. Month-to-month customers are 55% of the base but **89% of all leavers**, and they leave more often at every tenure stage. |
+| **The first months are critical** | 53% of customers in their first 6 months left, against 10% of those with more than 4 years. Leavers had a median tenure of 10 months, against 38 for those who stayed. |
+| **Other warning signs** | Fiber optic internet (42% churn against 19% for DSL), payment by electronic check (45%), no tech support or online security (about 42% against 15%) and senior citizens (42% against 24%). |
+| **Cheaper plans churn less** | Customers paying $18 to $25 a month left at 9%, against 26.5% overall. |
 | **The riskiest group** | New, month-to-month customers with fiber optic internet leave at **70%**. They are 13% of customers and 34% of leavers. |
-| **No effect** | Gender and phone service make no difference to churn. |
+| **Almost no association** | Gender and phone service show almost no association with churn in this dataset. |
 
 ![Churn rate by contract and tenure](figures/08_contract_tenure.png)
 
@@ -60,12 +63,13 @@ This project answers four questions:
 
 ### 1. A risk score for every customer
 
-A logistic regression model scores each customer's chance of leaving. It was trained on 75% of customers and tested on the other 25% that it had never seen.
+A logistic regression model scores each customer's chance of leaving. It was trained on 75% of customers and tested on the other 25% that it had never seen. It uses all customer details except `customerID` and `TotalCharges` (which largely repeats tenure, correlation 0.83).
 
-- **AUC 0.845** on the test set, close to the cross-validation score (0.843)
-- A random forest was tested and scored the same, so the simpler, explainable model was kept
+- **AUC 0.845** on the test set, close to the 5-fold cross-validation score (0.843)
+- A random forest was tested and scored the same (0.843), so the simpler, explainable model was kept
+- With the default 50% cut-off: accuracy 80.1% (always predicting "stays" would score 73.5%), precision 64.7%, recall 55.0%
 - Contacting the **top 20%** of customers by risk reaches **50% of all leavers**, 2.5 times better than choosing at random. The top 40% reaches 78%
-- The scores are well calibrated, so they can be read as real probabilities
+- The strongest factors raising risk are fiber optic internet, a month-to-month contract and paperless billing. No internet service, a two-year contract and long tenure lower it most
 
 ![Model reach](figures/10_model_reach.png)
 
@@ -85,7 +89,7 @@ On the 1,761 test customers, assuming a $60 offer that keeps 30% of would-be lea
 | Offer to the top 20% by risk | 353 (20%) | 50% | $21,180 | $47,092 |
 | **Offer by the decision rule** | **704 (40%)** | **75%** | **$42,240** | **$60,221** |
 
-The decision rule earns about 3.4 times the profit of offering to everyone, at 40% of the cost.
+The decision rule earns about 3.4 times the profit of offering to everyone, at 40% of the cost. These figures show how the targeting strategy performs under the stated assumptions and are not a forecast of actual campaign results.
 
 ### 3. Three risk tiers
 
@@ -99,33 +103,34 @@ The decision rule earns about 3.4 times the profit of offering to everyone, at 4
 
 Across 15 combinations of offer cost ($30, $60, $100) and success rate (10% to 45%), **the decision rule never loses money**. Offering to everyone loses money in 8 of them.
 
-![Net profit under different assumptions](figures/14_sensitivity.png)
+![Estimated net campaign value under different assumptions](figures/14_sensitivity.png)
 
 ## Recommendations
 
-1. **Run a targeted retention campaign** using the risk score and the decision rule, starting with the High tier.
-2. **Test the offer on a small group first** (A/B test) to measure its real success rate.
-3. **Improve the first 6 to 12 months** with a welcome call, setup help and a check-in after the first bills.
-4. **Move month-to-month customers to longer contracts**, for example with a discount for a one-year plan.
-5. **Find out why fiber optic customers leave**: check price, reliability and competitor offers.
-6. **Promote tech support and online security**, for example as a free trial for new customers.
-7. **Encourage automatic payment** in place of electronic check.
+1. **Use churn risk scores to prioritise retention offers.** Start with the High-risk tier and monitor whether targeted offers improve retention.
+2. **Test retention offers before a wider rollout.** Run an A/B test to measure the actual success rate and cost per retained customer.
+3. **Improve the first 6 to 12 months** with welcome calls, setup assistance and follow-ups after the first bills.
+4. **Encourage month-to-month customers to consider longer contracts.** Test incentives for switching to one-year contracts and measure the impact on retention.
+5. **Investigate why fiber optic customers leave more often**: pricing, service reliability, complaints and competitor offers.
+6. **Test introductory offers for tech support and online security**, comparing uptake and churn against a control group.
+7. **Encourage automatic payment methods.** Test whether incentives for switching from electronic check improve retention.
 
-Recommendations 4 to 7 are based on patterns in the data, which show a link but not a cause. Each one should be tried on a small group before a full rollout.
+Recommendations 3 to 7 are based on observed associations in the dataset. Further testing is needed to determine whether these actions actually reduce churn.
 
 ## What the notebook covers
 
 | Section | Contents |
 |---|---|
+| Executive summary | The key findings in five bullet points |
 | 1. The business problem | Context, questions, audience, what success looks like |
 | 2. The dataset | Source and data dictionary |
 | 3. Setup and loading | Libraries, chart style, first look at the data |
 | 4. Data quality and cleaning | Data types, duplicates, the blank `TotalCharges` rows, category labels |
 | 5. Exploratory data analysis | Target, numeric columns, churn rate by group and by tenure, correlation, ranking of factors (Cramér's V) |
-| 6. Deep dive | Revenue lost, contract × tenure, the riskiest segment |
-| 7. Solution, part 1 | Train/test split, model comparison with cross-validation, test results, reach, calibration, model factors |
-| 8. Solution, part 2 | Decision rule, campaign profit, risk tiers, sensitivity check, target list |
-| 9. Recommendations | Seven actions, each with its evidence and how to measure it |
+| 6. Deep dive | Revenue associated with churn, contract × tenure, the riskiest segment |
+| 7. Solution, part 1 | Train/test split, model comparison with cross-validation, test results, reach, model factors |
+| 8. Solution, part 2 | Decision rule, campaign profit, risk tiers, sensitivity check, target list, summary of key numbers |
+| 9. Recommendations | Seven actions for retention and further testing |
 | 10. Limitations and next steps | What the analysis cannot show and what to do next |
 
 Every chart is followed by a short insight in plain words.
@@ -136,7 +141,9 @@ Every chart is followed by a short insight in plain words.
 Churn Analysis/
 ├── Telco Customer Churn Analysis.ipynb   # the full analysis
 ├── README.md
-├── figures/                              # all 14 charts as PNG files
+├── data/
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
+├── figures/                              # the 13 charts as PNG files
 └── outputs/
     ├── retention_target_list.csv         # ranked customer list for the retention team
     ├── campaign_plans.csv                # the three campaign plans compared
@@ -144,7 +151,25 @@ Churn Analysis/
     └── churn_rate_by_segment.csv         # churn rate for every customer group
 ```
 
+## How to run it
 
+1. Make sure `WA_Fn-UseC_-Telco-Customer-Churn.csv` is in the `data/` folder. If it is missing, download it from [Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn).
+
+2. Install the packages (Python 3.11):
+
+   ```bash
+   pip install pandas numpy matplotlib seaborn scipy scikit-learn notebook
+   ```
+
+3. Start Jupyter from this folder and open the notebook:
+
+   ```bash
+   jupyter notebook "Telco Customer Churn Analysis.ipynb"
+   ```
+
+4. Select **Kernel → Restart & Run All**. The charts are saved to `figures/` and the tables to `outputs/`.
+
+To test other campaign assumptions, change `OFFER_COST`, `SUCCESS_RATE` and `MONTHS_KEPT` in section 8.1 and re-run the section.
 
 ## Limitations
 
