@@ -1,0 +1,49 @@
+column,group,churn_rate,customers
+gender,Female,0.2692,3488
+gender,Male,0.2616,3555
+SeniorCitizen,Yes,0.4168,1142
+SeniorCitizen,No,0.2361,5901
+Partner,No,0.3296,3641
+Partner,Yes,0.1966,3402
+Dependents,No,0.3128,4933
+Dependents,Yes,0.1545,2110
+PhoneService,Yes,0.2671,6361
+PhoneService,No,0.2493,682
+MultipleLines,Yes,0.2861,2971
+MultipleLines,No,0.2504,3390
+MultipleLines,No phone service,0.2493,682
+InternetService,Fiber optic,0.4189,3096
+InternetService,DSL,0.1896,2421
+InternetService,No,0.074,1526
+OnlineSecurity,No,0.4177,3498
+OnlineSecurity,Yes,0.1461,2019
+OnlineSecurity,No internet service,0.074,1526
+OnlineBackup,No,0.3993,3088
+OnlineBackup,Yes,0.2153,2429
+OnlineBackup,No internet service,0.074,1526
+DeviceProtection,No,0.3913,3095
+DeviceProtection,Yes,0.225,2422
+DeviceProtection,No internet service,0.074,1526
+TechSupport,No,0.4164,3473
+TechSupport,Yes,0.1517,2044
+TechSupport,No internet service,0.074,1526
+StreamingTV,No,0.3352,2810
+StreamingTV,Yes,0.3007,2707
+StreamingTV,No internet service,0.074,1526
+StreamingMovies,No,0.3368,2785
+StreamingMovies,Yes,0.2994,2732
+StreamingMovies,No internet service,0.074,1526
+Contract,Month-to-month,0.4271,3875
+Contract,One year,0.1127,1473
+Contract,Two year,0.0283,1695
+PaperlessBilling,Yes,0.3357,4171
+PaperlessBilling,No,0.1633,2872
+PaymentMethod,Electronic check,0.4529,2365
+PaymentMethod,Mailed check,0.1911,1612
+PaymentMethod,Bank transfer (automatic),0.1671,1544
+PaymentMethod,Credit card (automatic),0.1524,1522
+TenureGroup,0-6 months,0.5294,1481
+TenureGroup,7-12 months,0.3589,705
+TenureGroup,13-24 months,0.2871,1024
+TenureGroup,25-48 months,0.2039,1594
+TenureGroup,49-72 months,0.0951,2239
