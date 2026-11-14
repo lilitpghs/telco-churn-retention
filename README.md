@@ -6,8 +6,9 @@ An end-to-end data analysis project in Python: data cleaning, exploratory data a
 
 **Tools:** Python, pandas, NumPy, Matplotlib, seaborn, SciPy, scikit-learn, Jupyter Notebook
 
+**[Open the full analysis notebook](Telco%20Customer%20Churn%20Analysis.ipynb)**
 
-
+---
 
 ## The business problem
 
@@ -140,6 +141,8 @@ Every chart is followed by a short insight in plain words.
 Churn Analysis/
 ├── Telco Customer Churn Analysis.ipynb   # the full analysis
 ├── README.md
+├── data/
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 ├── figures/                              # the 13 charts as PNG files
 └── outputs/
     ├── retention_target_list.csv         # ranked customer list for the retention team
@@ -148,6 +151,25 @@ Churn Analysis/
     └── churn_rate_by_segment.csv         # churn rate for every customer group
 ```
 
+## How to run it
+
+1. Make sure `WA_Fn-UseC_-Telco-Customer-Churn.csv` is in the `data/` folder. If it is missing, download it from [Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn).
+
+2. Install the packages (Python 3.11):
+
+   ```bash
+   pip install pandas numpy matplotlib seaborn scipy scikit-learn notebook
+   ```
+
+3. Start Jupyter from this folder and open the notebook:
+
+   ```bash
+   jupyter notebook "Telco Customer Churn Analysis.ipynb"
+   ```
+
+4. Select **Kernel → Restart & Run All**. The charts are saved to `figures/` and the tables to `outputs/`.
+
+To test other campaign assumptions, change `OFFER_COST`, `SUCCESS_RATE` and `MONTHS_KEPT` in section 8.1 and re-run the section.
 
 ## Limitations
 
